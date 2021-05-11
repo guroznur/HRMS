@@ -10,6 +10,6 @@
 - [ ] Entities </br>
 - [ ] Main </br>
 
-## Postgre Database
+## PostgreSQL
 **Database Table** </br>
 <img src = "https://github.com/guroznur/HRMS/blob/master/db.png" width = "600" height = "500">
