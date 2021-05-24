@@ -2,10 +2,11 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.entities.concretes.Company;
 
 public interface CompanyService {
 	
-	List<Company> getAll();
+	DataResult<List<Company>> getAll();
 
 }

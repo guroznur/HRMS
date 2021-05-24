@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 
@@ -21,9 +23,10 @@ public class JobSeekerManager implements JobSeekerService{
 	}
 
 	@Override
-	public List<JobSeeker> getAll() {
+	public DataResult<List<JobSeeker>> getAll() {
 	
-		return this.jobSeekerDao.findAll();
+		return new SuccessDataResult<List<JobSeeker>>(this.jobSeekerDao.findAll(),"İş arayanlar listelendi");
+				
 	}
 
 }
