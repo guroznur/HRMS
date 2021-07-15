@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 
@@ -27,6 +29,13 @@ public class JobSeekerManager implements JobSeekerService{
 	
 		return new SuccessDataResult<List<JobSeeker>>(this.jobSeekerDao.findAll(),"İş arayanlar listelendi");
 				
+	}
+
+	@Override
+	public Result add(JobSeeker jobSeeker) {
+		
+		this.jobSeekerDao.save(jobSeeker);
+		return new SuccessResult("Çalışan eklendi");
 	}
 
 }
