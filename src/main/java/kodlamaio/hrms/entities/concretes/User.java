@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,9 +22,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class User {
 	

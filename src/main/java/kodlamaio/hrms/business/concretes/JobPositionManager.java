@@ -5,49 +5,44 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.FieldService;
 import kodlamaio.hrms.business.abstracts.JobPositionService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.hrms.entities.concretes.JobPosition;
 
 @Service
 public class JobPositionManager implements JobPositionService{
 
-	private JobPositionDao jobPositionDao;
+	private FieldService<JobPosition> fieldService ;
 	
 	@Autowired
-	public JobPositionManager(JobPositionDao jobPositionDao) {
+	public JobPositionManager(FieldService<JobPosition> fieldService) {
 		super();
-		this.jobPositionDao = jobPositionDao;
+		this.fieldService = fieldService;
 	}
+	
 
 	@Override
 	public DataResult<List<JobPosition>> getAll() {
 		
-		return new SuccessDataResult<List<JobPosition>>(jobPositionDao.findAll(),"İş pozisyonları listelendi");	
+		return fieldService.getAll();	
 		
 	}
 
 	@Override
 	public Result add(JobPosition jobPosition) {
-		if(getByJobName(jobPosition.getJobName()).getData() != null) {
-			return new ErrorResult(jobPosition.getJobName());
-		}
 		
-		this.jobPositionDao.save(jobPosition);
-		return new SuccessResult("İş pozisyonu eklendi");
-	}
+		return fieldService.verifyData(jobPosition);
+		
+			
+	}	
 
-	@Override
-	public DataResult<JobPosition> getByJobName(String jobName) {
-		
-		return new SuccessDataResult<JobPosition>(this.jobPositionDao.findByJobName(jobName));
-	}
 	
 	
-
+	
 }
+
+	
+
+
